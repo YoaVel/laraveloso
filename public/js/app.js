@@ -34,7 +34,7 @@ function persistAndRender() {
 function renderItems() {
     if (items.length === 0) {
         itemsContainer.innerHTML = `<div class="col-span-full text-center py-16 bg-gray-50 rounded-2xl border border-dashed border-gray-300">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 13h6m-3-3v6m-9 5h18a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                                        <i class="fas fa-inbox text-4xl text-gray-400 mb-3 block"></i>
                                         <p class="mt-3 text-gray-500 font-medium">No hay elementos aún</p>
                                     </div>`;
         return;
@@ -45,11 +45,11 @@ function renderItems() {
                 <div class="flex justify-between items-start gap-2">
                     <h4 class="text-xl font-bold text-gray-800 break-words pr-2">${escapeHtml(item.title)}</h4>
                     <div class="flex gap-1 shrink-0">
-                        <button onclick="editItem(${item.id})" class="text-indigo-600 hover:text-indigo-800 p-1 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                        <button onclick="editItem(${item.id})" class="text-indigo-600 hover:text-indigo-800 p-1 rounded-full" title="Editar">
+                            <i class="fas fa-edit"></i>
                         </button>
-                        <button onclick="deleteItem(${item.id})" class="text-red-500 hover:text-red-700 p-1 rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        <button onclick="deleteItem(${item.id})" class="text-red-500 hover:text-red-700 p-1 rounded-full" title="Eliminar">
+                            <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ function renderItems() {
 }
 
 function updateCounter() {
-    if (itemCounterSpan) itemCounterSpan.innerText = items.length;
+    if (itemCounterSpan) itemCounterSpan.textContent = items.length;
 }
 
 function escapeHtml(str) {
@@ -100,7 +100,7 @@ window.editItem = function(id) {
         titleInput.value = item.title;
         contentInput.value = item.content;
         editIdInput.value = id;
-        submitBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> Actualizar`;
+        submitBtn.innerHTML = `<i class="fas fa-save mr-2"></i> Actualizar`;
         submitBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
         submitBtn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
         cancelEditBtn.classList.remove('hidden');
@@ -112,7 +112,7 @@ function resetForm() {
     titleInput.value = '';
     contentInput.value = '';
     editIdInput.value = '';
-    submitBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg> Guardar elemento`;
+    submitBtn.innerHTML = `<i class="fas fa-save mr-2"></i> Guardar elemento`;
     submitBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
     submitBtn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
     cancelEditBtn.classList.add('hidden');
